@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+</head>
+
+<body>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://localhost:6969');// client creates connection socket đến server
+    socket.on('news', function (data) { 
+            console.log(data); // log data to check
+        });
+    $(document).ready(function () {
+        $('#send_mess').click(function(){
+            socket.emit('mess',  $('#data').val()); // send event 'mess'
+             $('#data').val('');
+        });
+        
+    });
+</script>
+<h1>Test socket.io</h1>
+<input type="text" id="data"><br>
+<button id="send_mess">Send message</button><br>
+
+</html>
